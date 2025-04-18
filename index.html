@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morse Code Encoder/Decoder| Developed By Nazmul Hasan Piash</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Morse Code Encoder/Decoder</h1>
+        <textarea id="inputText" placeholder="Enter text here..."></textarea>
+        <button id="encodeButton">Encode to Morse</button>
+        <button id="decodeButton">Decode from Morse</button>
+        <div id="outputText"></div>
+        <h1>Design & Developed By Nazmul Hasan Piash</h1>
+    </div>
+    <script >
+        
+        // scripts.js
+
+const morseCode = {
+    'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.',
+    'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..',
+    'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.',
+    'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-',
+    'Y': '-.--', 'Z': '--..',
+    '0': '-----', '1': '.----', '2': '..---', '3': '...--', '4': '....-', 
+    '5': '.....', '6': '-....', '7': '--...', '8': '---..', '9': '----.',
+    '.': '.-.-.-', ',': '--..--', '?': '..--..', "'": '.----.', '!': '-.-.--',
+    '/': '-..-.', '(': '-.--.', ')': '-.--.-', '&': '.-...', ':': '---...',
+    ';': '-.-.-.', '=': '-...-', '+': '.-.-.', '-': '-....-', '_': '..--.-',
+    '"': '.-..-.', '$': '...-..-', '@': '.--.-.', ' ': '/'
+};
+
+const reverseMorseCode = Object.keys(morseCode).reduce((acc, key) => {
+    acc[morseCode[key]] = key;
+    return acc;
+}, {});
+
+document.getElementById('encodeButton').addEventListener('click', () => {
+    const inputText = document.getElementById('inputText').value.toUpperCase();
+    const outputText = inputText.split('').map(char => morseCode[char] || char).join(' ');
+    document.getElementById('outputText').innerText = outputText;
+});
+
+document.getElementById('decodeButton').addEventListener('click', () => {
+    const inputText = document.getElementById('inputText').value.split(' ');
+    const outputText = inputText.map(code => reverseMorseCode[code] || code).join('');
+    document.getElementById('outputText').innerText = outputText;
+});
+
+    </script>
+</body>
+</html>
